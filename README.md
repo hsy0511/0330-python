@@ -21,6 +21,7 @@ requests.get, requests.post, requests.put, requests.delete 사용하여 인코�
 데이터가 정상적으로 읽어 들어오면 Response 객체에서 200을 리턴한다.
 
 requests.get(url)을 사용하면 해당 웹페이지 호출 결과를 가진 Response 객체를 가진다.
+###### ※ Response은 응답 즉, 전달받은 것을 의미한다.
 ### 예제 1
 ```python
 import requests
