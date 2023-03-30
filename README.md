@@ -35,6 +35,8 @@ dic = {"id": 1, "name": "Kim", "age": 10}
 resp = requests.post('http://httpbin.org/post', data=dic) # 데이터를 딕셔너리로 자동 인코딩 해줌
 print(resp.text)
 ```
+![image](https://user-images.githubusercontent.com/104752580/228740415-20fbc580-c4b6-4f3b-82f8-8b20230a7e08.png)
+
 ## Response와 관련된 속성
 status_code 속성은 http status 결과를 체크한다.
 
@@ -43,6 +45,7 @@ text는 Response 데이터를 문자열로 리턴한다.
 content는 Response 데이터를 바이트로 리턴한다.
 
 raise_for_status() 메서드는 Response 에서 오류가 발생하면 호출하여 프로그램을 중단 시킨다.
+
 ### 예제 2
 ```python
 resp = requests.get( 'http://daum.net' )
@@ -52,6 +55,8 @@ if (resp.status_code == requests.codes.ok):
     html = resp.content # resp.status_code 가 정상적으로 실행됐을 때 데이터를 바이트로 리턴한다.
     print(html)
 ```
+![image](https://user-images.githubusercontent.com/104752580/228740214-ba851e52-036a-4233-be01-dd15e44b77ea.png)
+
 ## 한글 깨짐
 웹을 호출할 때 간혹 한글이 깨지는 경우가 있는데 해결방법은 Response의 인코딩 속성을 변경하면 된다.
 
@@ -74,6 +79,8 @@ resp.encoding='euc-kr' # 인코딩을 euc-kr로 변환하여 한글 인코딩으
 print(resp.encoding) # 어떤 인코딩이 쓰이고 있는지 출력한다.
 print(resp.text) # Response 데이터를 문자열로 읽어드린다.
 ```
+![image](https://user-images.githubusercontent.com/104752580/228740069-3fdad3eb-bde7-4407-ad8c-b0fe2026021d.png)
+
 korearace 사이트는 ISO-8859-1(영어를 포함한 많은 외국어 한글은 포함이 안됨)을 사용하고 있어서 한글이 깨진다.
 
 이때는 test 속성을 읽기 전에 Response의 인코딩 속성을 변경하면 된다.
@@ -92,6 +99,7 @@ html = "url"
 bs = bs4.BeautifulSoup(html, 'html.parser') # 응답받은 HTML 내용을 BeautifulSoup 클래스의 객체 형태로 반환합니다
 print(bs)
 ```
+
 ### 예제 4
 ```python
 # -*- coding: utf-8 -*- 
@@ -109,6 +117,8 @@ tags = bs.select('#header > div.special_bg > div > div.logo_area > h1 > a') # �
 title = tags[0].getText() # 인덱스 0번째 있는 값을 문자열로 리턴한다.
 print(title) # 문자열로 리턴한 데이터를 출력한다.
 ```
+![image](https://user-images.githubusercontent.com/104752580/228739918-b72b3fd9-cf27-4e7e-8183-131c184cb3de.png)
+
 select() 메서드는 Beautifulsoup 객체에서 특정 html 태그를 찾기 위해서 사용한다.
 (select() 메서드의 파라미터는 css 태그에서 selector로 지정하면된다 )
 
