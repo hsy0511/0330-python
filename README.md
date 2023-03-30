@@ -64,12 +64,15 @@ requests 모듈에서 자동 인코딩을 해준다. 즉, requests는 인코딩 
 ```python 
 import requests
  
-resp = requests.get('http://www.korearace.com/Iframe/loginMain.asp')
-resp.raise_for_status()
-print(resp.encoding)
-resp.encoding='euc-kr'
+resp = requests.get('http://www.korearace.com/Iframe/loginMain.asp') # korearace 사이트를 읽어드린다.
+resp.raise_for_status() # Response 에서 오류가 발생하면 프로그램을 중단 시킨다.
 
-print(resp.encoding)
+print(resp.encoding) # 어떤 인코딩이 쓰이고 있는지 출력한다.
+
+resp.encoding='euc-kr' # 인코딩을 euc-kr로 변환하여 한글 인코딩으로 변환하여 한글이 안깨지게 한다.
+
+print(resp.encoding) # 어떤 인코딩이 쓰이고 있는지 출력한다.
+print(resp.text) # Response 데이터를 문자열로 읽어드린다.
 ```
 korearace 사이트는 ISO-8859-1(영어를 포함한 많은 외국어 한글은 포함이 안됨)을 사용하고 있어서 한글이 깨진다.
 
@@ -97,14 +100,14 @@ print(bs)
 
 import requests, bs4
  
-resp = requests.get('http://naver.com/')
-resp.raise_for_status()
-html = resp.text
+resp = requests.get('http://naver.com/') # 네이버 홈페이지를 읽어드린다.
+resp.raise_for_status() # Response에서 오류가 발생하면 프로그램을 중지시킨다.
+html = resp.text # response 데이터를 문자열로 변환한다.
  
-bs = bs4.BeautifulSoup(html, 'html.parser')
-tags = bs.select('#header > div.special_bg > div > div.logo_area > h1 > a') 
-title = tags[0].getText()
-print(title)
+bs = bs4.BeautifulSoup(html, 'html.parser') # 응답받은 HTML 내용을 BeautifulSoup 클래스의 객체 형태로 변환한다.
+tags = bs.select('#header > div.special_bg > div > div.logo_area > h1 > a') # 특정한 css태그를 selector로 찾아서 긁어온다.
+title = tags[0].getText() # 인덱스 0번째 있는 값을 문자열로 리턴한다.
+print(title) # 문자열로 리턴한 데이터를 출력한다.
 ```
 select() 메서드는 Beautifulsoup 객체에서 특정 html 태그를 찾기 위해서 사용한다.
 (select() 메서드의 파라미터는 css 태그에서 selector로 지정하면된다 )
